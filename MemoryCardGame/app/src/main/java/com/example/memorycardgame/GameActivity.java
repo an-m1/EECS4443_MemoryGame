@@ -3,9 +3,11 @@ package com.example.memorycardgame;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,10 +20,29 @@ public class GameActivity extends AppCompatActivity {
     private List<MemoryCard> cards;
     private Integer indexOfSingleSelectedCard = null;
 
+    private int secondsElapsed = 0;
+    private boolean gameStarted = false;
+    private boolean gameFinished = false;
+
+    private TextView timerTextView;
+    private Handler timerHandler = new Handler();
+    private Runnable timerRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if (!gameFinished) {
+                secondsElapsed++;
+                updateTimer();
+                timerHandler.postDelayed(this, 1000); // Update every second
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        timerTextView = findViewById(R.id.timerTextView);
 
         List<Integer> images = new ArrayList<>();
         images.add(R.drawable.facecard1);
@@ -52,6 +73,9 @@ public class GameActivity extends AppCompatActivity {
         for (int i = 0; i < buttons.size(); i++) {
             final int index = i;
             buttons.get(i).setOnClickListener(v -> {
+                if (!gameStarted) {
+                    startGame(); // Start the timer when the first move is made
+                }
                 Log.i(TAG, "button clicked!!");
                 // Update models
                 updateModels(index);
@@ -59,6 +83,15 @@ public class GameActivity extends AppCompatActivity {
                 updateViews();
             });
         }
+    }
+
+    private void startGame() {
+        gameStarted = true;
+        timerHandler.post(timerRunnable); // Start the timer
+    }
+
+    private void updateTimer() {
+        timerTextView.setText("Time: " + secondsElapsed + "s");
     }
 
     private void updateViews() {
@@ -69,6 +102,28 @@ public class GameActivity extends AppCompatActivity {
                 button.setAlpha(0.1f);
             }
             button.setImageResource(card.isFaceUp() ? card.getIdentifier() : R.drawable.back);
+        }
+
+        // Check if the game is finished
+        if (allCardsMatched()) {
+            finishGame();
+        }
+    }
+
+    private boolean allCardsMatched() {
+        for (MemoryCard card : cards) {
+            if (!card.isMatched()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void finishGame() {
+        if (!gameFinished) {
+            gameFinished = true;
+            timerHandler.removeCallbacks(timerRunnable); // Stop the timer
+            Toast.makeText(this, "Congratulations! You finished the game in " + secondsElapsed + " seconds!", Toast.LENGTH_LONG).show();
         }
     }
 

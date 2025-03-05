@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Memory Card Game</string>
+    <string name="timer">Time: 0s</string>
 </resources>
