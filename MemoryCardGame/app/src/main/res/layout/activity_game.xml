@@ -7,17 +7,28 @@
     android:background="@drawable/background"
     tools:context=".GameActivity">
 
+    <Switch
+        android:id="@+id/themeSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="Dark Mode"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageButton
         android:id="@+id/imageButton1"
         android:layout_width="100dp"
         android:layout_height="120dp"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="40dp"
         android:background="@android:color/transparent"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back" />
+        app:srcCompat="@drawable/lightmodeback" />
 
     <ImageButton
         android:id="@+id/imageButton2"
@@ -28,7 +39,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageButton1"
-        app:srcCompat="@drawable/back" />
+        app:srcCompat="@drawable/lightmodeback" />
 
     <ImageButton
         android:id="@+id/imageButton3"
@@ -39,7 +50,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="@+id/imageButton1"
         app:layout_constraintTop_toBottomOf="@+id/imageButton1"
-        app:srcCompat="@drawable/back" />
+        app:srcCompat="@drawable/lightmodeback" />
 
     <ImageButton
         android:id="@+id/imageButton4"
@@ -49,7 +60,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="@+id/imageButton2"
         app:layout_constraintTop_toTopOf="@+id/imageButton3"
-        app:srcCompat="@drawable/back" />
+        app:srcCompat="@drawable/lightmodeback" />
 
     <ImageButton
         android:id="@+id/imageButton5"
@@ -60,7 +71,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="@+id/imageButton3"
         app:layout_constraintTop_toBottomOf="@+id/imageButton3"
-        app:srcCompat="@drawable/back" />
+        app:srcCompat="@drawable/lightmodeback" />
 
     <ImageButton
         android:id="@+id/imageButton6"
@@ -70,7 +81,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="@+id/imageButton4"
         app:layout_constraintTop_toTopOf="@+id/imageButton5"
-        app:srcCompat="@drawable/back" />
+        app:srcCompat="@drawable/lightmodeback" />
 
     <ImageButton
         android:id="@+id/imageButton7"
@@ -81,7 +92,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="@+id/imageButton5"
         app:layout_constraintTop_toBottomOf="@+id/imageButton5"
-        app:srcCompat="@drawable/back" />
+        app:srcCompat="@drawable/lightmodeback" />
 
     <ImageButton
         android:id="@+id/imageButton8"
@@ -91,8 +102,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="@+id/imageButton6"
         app:layout_constraintTop_toTopOf="@+id/imageButton7"
-        app:srcCompat="@drawable/back" />
-
+        app:srcCompat="@drawable/lightmodeback" />
 
     <TextView
         android:id="@+id/timerTextView"
@@ -107,4 +117,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageButton8" />
+
+    <Button
+        android:id="@+id/resetButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:text="@string/reset"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/timerTextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

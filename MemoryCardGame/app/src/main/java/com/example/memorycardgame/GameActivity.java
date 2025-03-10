@@ -1,11 +1,15 @@
 package com.example.memorycardgame;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.Toast;
 import android.widget.TextView;
 
@@ -14,8 +18,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class GameActivity extends AppCompatActivity {
-
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "GameActivity";
     private List<ImageButton> buttons;
     private List<MemoryCard> cards;
     private Integer indexOfSingleSelectedCard = null;
@@ -23,8 +26,10 @@ public class GameActivity extends AppCompatActivity {
     private int secondsElapsed = 0;
     private boolean gameStarted = false;
     private boolean gameFinished = false;
-
+    private Switch darkModeSwitch;
+    private boolean isDarkTheme = false;
     private TextView timerTextView;
+    private Button resetButton;
     private Handler timerHandler = new Handler();
     private Runnable timerRunnable = new Runnable() {
         @Override
@@ -42,13 +47,16 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        loadTheme(); // Load the saved theme
+        darkModeSwitch = findViewById(R.id.themeSwitch);
         timerTextView = findViewById(R.id.timerTextView);
+        resetButton = findViewById(R.id.resetButton);
 
         List<Integer> images = new ArrayList<>();
-        images.add(R.drawable.facecard1);
-        images.add(R.drawable.facecard2);
-        images.add(R.drawable.facecard3);
-        images.add(R.drawable.facecard4);
+        images.add(R.drawable.lightmodefacecard1);
+        images.add(R.drawable.lightmodefacecard2);
+        images.add(R.drawable.lightmodefacecard3);
+        images.add(R.drawable.lightmodefacecard4);
 
         // Add each image twice so we can create pairs
         images.addAll(images);
@@ -83,7 +91,55 @@ public class GameActivity extends AppCompatActivity {
                 updateViews();
             });
         }
+        resetButton.setOnClickListener(v -> resetGame());
+
+        darkModeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            isDarkTheme = isChecked;
+
+            // Save the user's preference
+            SharedPreferences.Editor editor = getSharedPreferences("settings", MODE_PRIVATE).edit();
+            editor.putBoolean("dark_theme", isDarkTheme);
+            editor.apply();
+            resetGame();
+
+            // Update the card images dynamically
+            updateCardImages();
+        });
     }
+
+    private void resetGame() {
+        gameFinished = false;
+        gameStarted = false;
+        secondsElapsed = 0;
+        indexOfSingleSelectedCard = null;
+        updateTimer();
+
+        // Reshuffle images
+        List<Integer> images = new ArrayList<>();
+        images.add(R.drawable.lightmodefacecard1);
+        images.add(R.drawable.lightmodefacecard2);
+        images.add(R.drawable.lightmodefacecard3);
+        images.add(R.drawable.lightmodefacecard4);
+        images.addAll(images);
+        Collections.shuffle(images);
+
+        // Reset the cards and buttons
+        for (int i = 0; i < cards.size(); i++) {
+            cards.get(i).setIdentifier(images.get(i));
+            cards.get(i).setFaceUp(false);
+            cards.get(i).setMatched(false);
+
+            // Restore button opacity
+            buttons.get(i).setAlpha(1.0f);
+        }
+
+        // Update UI
+        updateViews();
+
+        // Stop the timer if running
+        timerHandler.removeCallbacks(timerRunnable);
+    }
+
 
     private void startGame() {
         gameStarted = true;
@@ -95,13 +151,14 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void updateViews() {
+        int backImage = isDarkTheme ? R.drawable.darkmodeback : R.drawable.lightmodeback;
         for (int i = 0; i < cards.size(); i++) {
             MemoryCard card = cards.get(i);
             ImageButton button = buttons.get(i);
             if (card.isMatched()) {
                 button.setAlpha(0.1f);
             }
-            button.setImageResource(card.isFaceUp() ? card.getIdentifier() : R.drawable.back);
+            button.setImageResource(card.isFaceUp() ? card.getIdentifier() : backImage);
         }
 
         // Check if the game is finished
@@ -163,6 +220,41 @@ public class GameActivity extends AppCompatActivity {
             Toast.makeText(this, "Match found!!", Toast.LENGTH_SHORT).show();
             cards.get(position1).setMatched(true);
             cards.get(position2).setMatched(true);
+        }
+    }
+
+    // Function to save and apply the theme
+    private void setThemeMode(int mode) {
+        AppCompatDelegate.setDefaultNightMode(mode);
+        SharedPreferences.Editor editor = getSharedPreferences("settings", MODE_PRIVATE).edit();
+        editor.putInt("theme", mode);
+        editor.apply();
+        recreate(); // Restart activity to apply theme
+    }
+
+    // Function to load the saved theme
+    private void loadTheme() {
+        SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
+        isDarkTheme = prefs.getBoolean("dark_theme", false); // Default to light mode
+    }
+
+
+    private void updateCardImages() {
+        // Choose the correct set of images based on the theme
+        int backImage = isDarkTheme ? R.drawable.darkmodeback : R.drawable.background;
+
+        List<Integer> images = new ArrayList<>();
+        images.add(isDarkTheme ? R.drawable.darkmodefacecard1 : R.drawable.lightmodefacecard1);
+        images.add(isDarkTheme ? R.drawable.darkmodefacecard2 : R.drawable.lightmodefacecard2);
+        images.add(isDarkTheme ? R.drawable.darkmodefacecard3 : R.drawable.lightmodefacecard3);
+        images.add(isDarkTheme ? R.drawable.darkmodefacecard4 : R.drawable.lightmodefacecard4);
+
+        images.addAll(images); // Create pairs
+        Collections.shuffle(images);
+
+        for (int i = 0; i < cards.size(); i++) {
+            cards.get(i).setIdentifier(images.get(i));
+            buttons.get(i).setImageResource(cards.get(i).isFaceUp() ? images.get(i) : backImage);
         }
     }
 }
