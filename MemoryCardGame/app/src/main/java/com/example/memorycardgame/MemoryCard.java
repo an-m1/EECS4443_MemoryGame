@@ -1,13 +1,13 @@
 package com.example.memorycardgame;
 
 import android.content.Context;
-import android.os.Handler;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.TextView;
 import android.animation.ObjectAnimator;
 import androidx.cardview.widget.CardView;
 import android.view.Gravity;
+import android.os.Handler;
 
 public class MemoryCard extends CardView {
     private TextView frontView;
@@ -27,19 +27,19 @@ public class MemoryCard extends CardView {
         setRadius(8);
         setUseCompatPadding(true);
 
-        // Layout parameters
+        // Layout parameters - better spacing for 4x6 grid
         GridLayout.LayoutParams params = new GridLayout.LayoutParams();
         params.width = 0;
         params.height = 0;
         params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
         params.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
-        params.setMargins(4, 4, 4, 4);
+        params.setMargins(2, 2, 2, 2); // Reduced margins to save space
         setLayoutParams(params);
 
         // Front view (question mark)
         frontView = new TextView(context);
         frontView.setText("?");
-        frontView.setTextSize(24);
+        frontView.setTextSize(18); // Smaller text size
         frontView.setGravity(Gravity.CENTER);
         frontView.setVisibility(View.VISIBLE);
         addView(frontView);
@@ -47,7 +47,7 @@ public class MemoryCard extends CardView {
         // Back view (emoji)
         backView = new TextView(context);
         backView.setText(emoji);
-        backView.setTextSize(24);
+        backView.setTextSize(18); // Smaller text size
         backView.setGravity(Gravity.CENTER);
         backView.setVisibility(View.GONE);
         addView(backView);

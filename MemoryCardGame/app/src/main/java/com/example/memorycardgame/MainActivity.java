@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         timeTextView = findViewById(R.id.timeTextView);
         movesTextView = findViewById(R.id.movesTextView);
 
-        initializeGame(4, 4); // Default 4x4 grid
+        initializeGame(6, 4); // Default 4x6 grid
     }
 
     private void initializeGame(int rows, int cols) {
@@ -50,8 +50,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize emojis
         emojis = new ArrayList<>();
+        // emojis for 4x6 grid
         String[] emojiArray = {"🌹", "🌻", "🌺", "🌈", "🍓", "🍎", "🍉", "🍊",
-                "🥭", "🍍", "🍋", "🍏", "🍐", "🥝", "🍇", "🥥"};
+                "🥭", "🍍", "🍋", "🍏", "🍐", "🥝", "🍇", "🥥",
+                "🍅", "🌶️", "🍄", "🧅", "🥦", "🥑", "🍔", "🍕"};
 
         // Add pairs of emojis
         for (int i = 0; i < remainingPairs; i++) {
@@ -60,16 +62,38 @@ public class MainActivity extends AppCompatActivity {
         }
         Collections.shuffle(emojis);
 
-        // Setup grid
+        // Setup grid with square cells
         gridLayout.removeAllViews();
         gridLayout.setColumnCount(cols);
         gridLayout.setRowCount(rows);
+        gridLayout.setUseDefaultMargins(false); // Change to false
+        gridLayout.setPadding(4, 4, 4, 4); // Add small padding to the grid itself
+
+        // Calculate the width of each card to make them square
+        int screenWidth = getResources().getDisplayMetrics().widthPixels;
+        int totalMargin = (cols - 1) * 8; // Account for margins between cards
+        int gridPadding = 32; // Left and right padding of the grid
+        int cardWidth = (screenWidth - totalMargin - gridPadding) / cols;
 
         // Create cards
         cards = new ArrayList<>();
         for (int i = 0; i < rows * cols; i++) {
             com.example.memorycardgame.MemoryCard card = new com.example.memorycardgame.MemoryCard(this, emojis.get(i));
             card.setOnClickListener(v -> onCardClick((com.example.memorycardgame.MemoryCard) v));
+
+            // Fixed square dimensions
+            GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+            params.width = cardWidth;
+            params.height = cardWidth;
+            params.setMargins(4, 4, 4, 4); // Smaller margins
+
+            // Calculate row and column for this card
+            int row = i / cols;
+            int col = i % cols;
+            params.rowSpec = GridLayout.spec(row);
+            params.columnSpec = GridLayout.spec(col);
+
+            card.setLayoutParams(params);
             cards.add(card);
             gridLayout.addView(card);
         }
