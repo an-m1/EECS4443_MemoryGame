@@ -1,54 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#3AFF0000">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="MEMORY MATCHING GAME"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="#000000"
-        android:gravity="center"
-        android:padding="16dp"
-        android:background="#33FFFFFF"
-        android:layout_margin="8dp"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:background="#33FFFFFF"
-        android:layout_margin="8dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/movesTextView"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="MEMORY MATCHING GAME"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:gravity="center"
+                android:padding="16dp"
+                android:background="#33FFFFFF"
+                android:layout_margin="8dp"/>
+
+            <ImageButton
+                android:id="@+id/optionsButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="16dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/menu"
+                android:contentDescription="Options Menu" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:background="#33FFFFFF"
+            android:layout_margin="8dp">
+
+            <TextView
+                android:id="@+id/movesTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Moves: 0"
+                android:textColor="#000000"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="12dp"/>
+
+            <TextView
+                android:id="@+id/timeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time: 00:00"
+                android:textColor="#000000"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="12dp"/>
+        </RelativeLayout>
+
+        <GridLayout
+            android:id="@+id/gridLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Moves: 0"
-            android:textColor="#000000"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="12dp"/>
+            android:layout_weight="1"
+            android:padding="16dp"
+            android:layout_gravity="center"/>
+    </LinearLayout>
 
-        <TextView
-            android:id="@+id/timeTextView"
-            android:layout_width="wrap_content"
+    <FrameLayout
+        android:id="@+id/pauseMenuContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="#99000000">
+
+        <LinearLayout
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="Time: 00:00"
-            android:textColor="#000000"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="12dp"/>
-    </RelativeLayout>
+            android:layout_gravity="center"
+            android:background="#4D394B"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:elevation="8dp"
+            android:gravity="center">
 
-    <GridLayout
-        android:id="@+id/gridLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:padding="16dp"
-        android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="GAME PAUSED"
+                android:textColor="#FFEB3B"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginBottom="32dp"/>
 
-</LinearLayout>
+            <Button
+                android:id="@+id/resumeButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="RESUME GAME"
+                android:background="#4CAF50"
+                android:textColor="#FFFFFF"
+                android:padding="16dp"
+                android:layout_marginBottom="16dp"/>
+
+            <Button
+                android:id="@+id/restartButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="START OVER"
+                android:background="#FF5722"
+                android:textColor="#FFFFFF"
+                android:padding="16dp"
+                android:layout_marginBottom="16dp"/>
+
+            <Button
+                android:id="@+id/themeButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DARK/LIGHT MODE"
+                android:background="#2196F3"
+                android:textColor="#FFFFFF"
+                android:padding="16dp"/>
+        </LinearLayout>
+    </FrameLayout>
+</RelativeLayout>

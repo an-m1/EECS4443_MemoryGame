@@ -3,7 +3,10 @@ package com.example.memorycardgame;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.GridLayout;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
+
 
 public class MainActivity extends AppCompatActivity {
     private GridLayout gridLayout;
@@ -27,6 +31,15 @@ public class MainActivity extends AppCompatActivity {
     private Timer timer;
     private int remainingPairs;
 
+    // New variables for pause functionality
+    private boolean isPaused = false;
+    private FrameLayout pauseMenuContainer;
+    private ImageButton optionsButton;
+    private Button resumeButton;
+    private Button restartButton;
+    private Button themeButton;
+    private boolean isDarkMode = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +49,64 @@ public class MainActivity extends AppCompatActivity {
         timeTextView = findViewById(R.id.timeTextView);
         movesTextView = findViewById(R.id.movesTextView);
 
+        // Initialize pause menu components
+        pauseMenuContainer = findViewById(R.id.pauseMenuContainer);
+        optionsButton = findViewById(R.id.optionsButton);
+        resumeButton = findViewById(R.id.resumeButton);
+        restartButton = findViewById(R.id.restartButton);
+        themeButton = findViewById(R.id.themeButton);
+
+        // Set click listeners for pause menu buttons
+        optionsButton.setOnClickListener(v -> pauseGame());
+        resumeButton.setOnClickListener(v -> resumeGame());
+        restartButton.setOnClickListener(v -> restartGame());
+        themeButton.setOnClickListener(v -> toggleTheme());
+
         initializeGame(6, 4); // Default 4x6 grid
+    }
+
+    private void pauseGame() {
+        if (!isPaused) {
+            isPaused = true;
+
+            // Pause the timer
+            if (timer != null) {
+                timer.cancel();
+                timer = null;
+            }
+
+            // Show the pause menu
+            pauseMenuContainer.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void resumeGame() {
+        if (isPaused) {
+            isPaused = false;
+
+            // Hide the pause menu
+            pauseMenuContainer.setVisibility(View.GONE);
+
+            // Restart the timer if game is not complete
+            if (remainingPairs > 0) {
+                startTimer();
+            }
+        }
+    }
+
+    private void restartGame() {
+        // Hide the pause menu
+        pauseMenuContainer.setVisibility(View.GONE);
+        isPaused = false;
+
+        // Reinitialize the game
+        initializeGame(6, 4);
+    }
+
+    private void toggleTheme() {
+        isDarkMode = !isDarkMode;
+        // We'll implement the theme change later
+        Toast.makeText(this, isDarkMode ? "Dark mode enabled" : "Light mode enabled", Toast.LENGTH_SHORT).show();
     }
 
     private void initializeGame(int rows, int cols) {
@@ -66,13 +136,13 @@ public class MainActivity extends AppCompatActivity {
         gridLayout.removeAllViews();
         gridLayout.setColumnCount(cols);
         gridLayout.setRowCount(rows);
-        gridLayout.setUseDefaultMargins(false); // Change to false
-        gridLayout.setPadding(4, 4, 4, 4); // Add small padding to the grid itself
+        gridLayout.setUseDefaultMargins(false);
+        gridLayout.setPadding(4, 4, 4, 4);
 
         // Calculate the width of each card to make them square
         int screenWidth = getResources().getDisplayMetrics().widthPixels;
-        int totalMargin = (cols - 1) * 8; // Account for margins between cards
-        int gridPadding = 32; // Left and right padding of the grid
+        int totalMargin = (cols - 1) * 8;
+        int gridPadding = 32;
         int cardWidth = (screenWidth - totalMargin - gridPadding) / cols;
 
         // Create cards
@@ -85,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
             params.width = cardWidth;
             params.height = cardWidth;
-            params.setMargins(4, 4, 4, 4); // Smaller margins
+            params.setMargins(4, 4, 4, 4);
 
             // Calculate row and column for this card
             int row = i / cols;
@@ -103,7 +173,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void onCardClick(com.example.memorycardgame.MemoryCard card) {
-        if (isProcessing || card.isFlipped()) return;
+        // Don't allow card clicks when game is paused
+        if (isProcessing || card.isFlipped() || isPaused) return;
 
         card.flip();
 
@@ -156,9 +227,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void gameWon() {
-        timer.cancel();
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
         String message = String.format("Congratulations!\nCompleted in %d moves\nTime: %02d:%02d",
                 moves, minutes, seconds);
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Pause the game when app goes to background
+        if (!isPaused && timer != null) {
+            pauseGame();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Make sure to cancel timer to prevent memory leaks
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
     }
 }
