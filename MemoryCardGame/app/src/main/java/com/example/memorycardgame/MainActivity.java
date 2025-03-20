@@ -15,7 +15,7 @@ import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
+// TODO: add a 'go to home' button in the in-game options menu. implement the dark mode.
 public class MainActivity extends AppCompatActivity {
     private GridLayout gridLayout;
     private TextView timeTextView;
