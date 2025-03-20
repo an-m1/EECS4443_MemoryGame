@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class HomeActivity extends AppCompatActivity {
 
     private Button playButton;
-    private Button highScoresButton;
     private Button settingsButton;
 
     @Override
@@ -32,21 +31,12 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        highScoresButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // For now, just show a toast message
-                // Later you can create a HighScoreActivity
-                Toast.makeText(HomeActivity.this, "High Scores feature coming soon!", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // For now, just show a toast message
-                // Later you can create a SettingsActivity
-                Toast.makeText(HomeActivity.this, "Settings feature coming soon!", Toast.LENGTH_SHORT).show();
+                Intent settingsIntent = new Intent(HomeActivity.this, SettingsActivity.class);
+                startActivity(settingsIntent);
             }
         });
     }

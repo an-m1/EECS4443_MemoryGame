@@ -39,31 +39,31 @@ public class SettingsActivity extends AppCompatActivity {
         volumeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                // We'll implement volume control later
+                // TODO
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                // Not needed for now
+                // TODO
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                // Not needed for now
+                // TODO
             }
         });
 
         // Set up switch listeners
         musicSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            // We'll implement music toggle later
+            // TODO
         });
 
         darkModeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            // We'll implement dark mode toggle later
+            // TODO
         });
 
         vibrationSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            // We'll implement vibration toggle later
+            // TODO
         });
     }
 }

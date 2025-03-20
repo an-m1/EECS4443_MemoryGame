@@ -39,7 +39,7 @@ public class MemoryCard extends CardView {
         // Front view (question mark)
         frontView = new TextView(context);
         frontView.setText("?");
-        frontView.setTextSize(18); // Smaller text size
+        frontView.setTextSize(28); // Smaller text size
         frontView.setGravity(Gravity.CENTER);
         frontView.setVisibility(View.VISIBLE);
         addView(frontView);
@@ -47,7 +47,7 @@ public class MemoryCard extends CardView {
         // Back view (emoji)
         backView = new TextView(context);
         backView.setText(emoji);
-        backView.setTextSize(18); // Smaller text size
+        backView.setTextSize(28); // Smaller text size
         backView.setGravity(Gravity.CENTER);
         backView.setVisibility(View.GONE);
         addView(backView);
