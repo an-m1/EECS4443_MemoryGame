@@ -1,5 +1,6 @@
 package com.example.memorycardgame;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     private Button resumeButton;
     private Button restartButton;
     private Button themeButton;
+    private Button settingsButton;
+    private Button mainMenuButton;
     private boolean isDarkMode = false;
 
     @Override
@@ -55,12 +58,21 @@ public class MainActivity extends AppCompatActivity {
         resumeButton = findViewById(R.id.resumeButton);
         restartButton = findViewById(R.id.restartButton);
         themeButton = findViewById(R.id.themeButton);
+        settingsButton = findViewById(R.id.gameSettingsButton);
+        mainMenuButton = findViewById(R.id.mainMenuButton);
 
         // Set click listeners for pause menu buttons
         optionsButton.setOnClickListener(v -> pauseGame());
         resumeButton.setOnClickListener(v -> resumeGame());
         restartButton.setOnClickListener(v -> restartGame());
-        themeButton.setOnClickListener(v -> toggleTheme());
+        settingsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(intent);
+        });
+        mainMenuButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+            startActivity(intent);
+        });
 
         initializeGame(6, 4); // Default 4x6 grid
     }

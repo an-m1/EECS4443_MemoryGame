@@ -16,117 +16,138 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="MEMORY MATCHING GAME"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="#000000"
+                android:layout_margin="8dp"
+                android:background="#33FFFFFF"
                 android:gravity="start"
                 android:padding="16dp"
-                android:background="#33FFFFFF"
-                android:layout_margin="8dp"/>
+                android:text="MEMORY MATCHING GAME"
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <ImageButton
                 android:id="@+id/optionsButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
                 android:layout_margin="16dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/menu"
-                android:contentDescription="Options Menu" />
+                android:contentDescription="Options Menu"
+                android:src="@drawable/menu" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
+            android:layout_margin="8dp"
             android:background="#33FFFFFF"
-            android:layout_margin="8dp">
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/movesTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Moves: 0"
-                android:textColor="#000000"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="12dp"/>
+                android:layout_marginStart="12dp"
+                android:text="Moves: 0"
+                android:textColor="#000000" />
 
             <TextView
                 android:id="@+id/timeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Time: 00:00"
-                android:textColor="#000000"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="12dp"/>
+                android:layout_marginEnd="12dp"
+                android:text="Time: 00:00"
+                android:textColor="#000000" />
         </RelativeLayout>
 
         <GridLayout
             android:id="@+id/gridLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            android:padding="16dp"
-            android:layout_gravity="center"/>
+            android:padding="16dp" />
     </LinearLayout>
 
     <FrameLayout
         android:id="@+id/pauseMenuContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
-        android:background="#99000000">
+        android:background="#99000000"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="#4D394B"
-            android:orientation="vertical"
-            android:padding="24dp"
             android:elevation="8dp"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:gravity="center"
                 android:text="GAME PAUSED"
                 android:textColor="#FFEB3B"
                 android:textSize="28sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:layout_marginBottom="32dp"/>
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/resumeButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="RESUME GAME"
+                android:layout_marginBottom="16dp"
                 android:background="#4CAF50"
-                android:textColor="#FFFFFF"
                 android:padding="16dp"
-                android:layout_marginBottom="16dp"/>
+                android:text="RESUME GAME"
+                android:textColor="#FFFFFF" />
 
             <Button
                 android:id="@+id/restartButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="START OVER"
+                android:layout_marginBottom="16dp"
                 android:background="#FF5722"
-                android:textColor="#FFFFFF"
                 android:padding="16dp"
-                android:layout_marginBottom="16dp"/>
+                android:text="START OVER"
+                android:textColor="#FFFFFF" />
 
+            <!-- TODO: Remove this dark/light mode since we have the toggle in the settings activity.-->
             <Button
                 android:id="@+id/themeButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="DARK/LIGHT MODE"
+                android:layout_marginBottom="16dp"
                 android:background="#2196F3"
-                android:textColor="#FFFFFF"
-                android:padding="16dp"/>
+                android:padding="16dp"
+                android:text="DARK/LIGHT MODE"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/gameSettingsButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="#FF9800"
+                android:padding="16dp"
+                android:text="SETTINGS"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/mainMenuButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#818689"
+                android:padding="16dp"
+                android:text="Main Menu"
+                android:textColor="#FFFFFF" />
         </LinearLayout>
     </FrameLayout>
 </RelativeLayout>
