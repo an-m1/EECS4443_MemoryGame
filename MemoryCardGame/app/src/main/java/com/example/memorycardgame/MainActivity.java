@@ -17,6 +17,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 // TODO: implement the dark mode.
+/* TODO: when the game is complete, direct the user to a summary activity, where the users game stat are displayed.
+    we want fields like:
+    - time taken
+    - number of mismatches
+    - current mode (light/dark mode)
+    - battery % lost (compare intial and final battery %)
+ */
 public class MainActivity extends AppCompatActivity {
     private GridLayout gridLayout;
     private TextView timeTextView;
