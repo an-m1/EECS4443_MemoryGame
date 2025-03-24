@@ -1,3 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="colorBackground" format="color" />
+    <attr name="colorHeader" format="color" />
+    <attr name="colorCard" format="color" />
+    <attr name="colorTextPrimary" format="color" />
+    <attr name="colorTextSecondary" format="color" />
+    <attr name="colorButtonPlay" format="color" />
+    <attr name="colorButtonSettings" format="color" />
+
+    <attr name="colorButtonMainMenu" format="color" />
+    <attr name="colorButtonResume" format="color" />
+    <attr name="colorButtonRestart" format="color" />
+    <attr name="colorButtonThemeToggle" format="color" />
+
 </resources>

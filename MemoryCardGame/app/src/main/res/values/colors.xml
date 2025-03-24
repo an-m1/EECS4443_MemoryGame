@@ -9,4 +9,25 @@
     <color name="white">#FFFFFFFF</color>
     <color name="header">#7CED9494</color>
     <color name="header2">#33ED9494</color>
+
+
+    <!-- Light theme colors -->
+    <color name="light_background">#FFFFFF</color>
+    <color name="light_header">#EDEADE</color>
+    <color name="light_card">#F9F6EE</color>
+    <color name="dark_text">#000000</color>
+    <color name="medium_text">#455A64</color>
+    <color name="light_button_play">#35CC3C</color>
+    <color name="light_button_settings">#C5AA82</color>
+    <color name="light_accent">#800020</color>
+
+    <!-- Dark theme colors -->
+    <color name="dark_background">#2B2D30</color>
+    <color name="dark_header">#1E1E1E</color>
+    <color name="dark_card">#2D2D2D</color>
+    <color name="light_text">#FFFFFF</color>
+    <color name="medium_light_text">#B0B0B0</color>
+    <color name="dark_button_play">#00C853</color>
+    <color name="dark_button_settings">#FF9100</color>
+    <color name="dark_accent">#F0FFFF</color>
 </resources>

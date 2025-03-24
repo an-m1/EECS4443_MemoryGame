@@ -2,6 +2,7 @@ package com.example.memorycardgame;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
@@ -26,6 +27,9 @@ public class SettingsActivity extends AppCompatActivity {
         musicSwitch = findViewById(R.id.musicSwitch);
         darkModeSwitch = findViewById(R.id.darkModeSwitch);
         vibrationSwitch = findViewById(R.id.vibrationSwitch);
+
+        // Initialize the dark mode switch state
+        darkModeSwitch.setChecked(ThemeManager.isDarkMode(this));
 
         // Set up back button to close this activity
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -58,8 +62,10 @@ public class SettingsActivity extends AppCompatActivity {
             // TODO
         });
 
+        // Set up switch listeners
         darkModeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            // TODO
+            ThemeManager.setDarkMode(this, isChecked);
+            recreate(); // Recreate the activity to apply the theme
         });
 
         vibrationSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {

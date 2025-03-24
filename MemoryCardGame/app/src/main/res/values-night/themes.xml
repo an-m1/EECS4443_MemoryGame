@@ -1,17 +1,24 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.MemoryCardGame" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
-        <item name="android:windowBackground">@drawable/darkmodebackground</item>
+<resources>
+    <!-- Dark theme -->
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Background colors -->
+        <item name="colorBackground">@color/dark_background</item>
+        <item name="colorHeader">@color/dark_header</item>
+        <item name="colorCard">@color/dark_card</item>
+        <item name="colorAccent">@color/dark_accent</item>
+
+        <!-- Text colors -->
+        <item name="colorTextPrimary">@color/light_text</item>
+        <item name="colorTextSecondary">@color/medium_light_text</item>
+
+        <!-- Button colors -->
+        <item name="colorButtonPlay">@color/dark_button_play</item>
+        <item name="colorButtonSettings">@color/dark_button_settings</item>
+
+        <!-- Pause Menu button colors (light theme) -->
+        <item name="colorButtonResume">#4CAF50</item>       <!-- Green -->
+        <item name="colorButtonRestart">#FF5722</item>     <!-- Deep Orange -->
+        <item name="colorButtonThemeToggle">#2196F3</item> <!-- Blue -->
+        <item name="colorButtonMainMenu">#818689</item>    <!-- Gray -->
     </style>
 </resources>

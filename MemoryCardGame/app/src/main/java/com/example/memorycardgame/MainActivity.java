@@ -47,10 +47,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton optionsButton;
     private Button resumeButton;
     private Button restartButton;
-    private Button themeButton;
     private Button settingsButton;
     private Button mainMenuButton;
-    private boolean isDarkMode = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
         optionsButton = findViewById(R.id.optionsButton);
         resumeButton = findViewById(R.id.resumeButton);
         restartButton = findViewById(R.id.restartButton);
-        themeButton = findViewById(R.id.themeButton);
         settingsButton = findViewById(R.id.gameSettingsButton);
         mainMenuButton = findViewById(R.id.mainMenuButton);
 
@@ -122,12 +119,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Reinitialize the game
         initializeGame(6, 4);
-    }
-
-    private void toggleTheme() {
-        isDarkMode = !isDarkMode;
-        // We'll implement the theme change later
-        Toast.makeText(this, isDarkMode ? "Dark mode enabled" : "Light mode enabled", Toast.LENGTH_SHORT).show();
     }
 
     private void initializeGame(int rows, int cols) {
