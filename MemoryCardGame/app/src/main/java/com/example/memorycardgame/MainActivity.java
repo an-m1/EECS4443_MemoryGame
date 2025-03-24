@@ -1,49 +1,41 @@
 package com.example.memorycardgame;
 
 import android.content.Intent;
+import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
-import android.view.WindowManager;
 
-
-
-/* TODO: when the game is complete, direct the user to a summary activity, where the users game stat are displayed.
-    we want fields like:
-    - time taken
-    - number of mismatches
-    - current mode (light/dark mode)
-    - battery % lost (compare initial and final battery %)
-
-    TODO: Find a way to disabled the devices "night shift", "true-tone", and "auto-brightness" to avoid display color changes during gameplay, and to maximize consistency between devices.
- */
 public class MainActivity extends AppCompatActivity {
     private GridLayout gridLayout;
     private TextView timeTextView;
     private TextView movesTextView;
     private ArrayList<String> emojis;
-    private ArrayList<com.example.memorycardgame.MemoryCard> cards;
-    private com.example.memorycardgame.MemoryCard firstCard;
-    private com.example.memorycardgame.MemoryCard secondCard;
+    private ArrayList<MemoryCard> cards;
+    private MemoryCard firstCard;
+    private MemoryCard secondCard;
     private boolean isProcessing = false;
     private int moves = 0;
     private int seconds = 0;
     private int minutes = 0;
     private Timer timer;
     private int remainingPairs;
+    private int mismatches = 0; // Track number of mismatches
 
-    // New variables for pause functionality
+    // Variables for pause functionality
     private boolean isPaused = false;
     private FrameLayout pauseMenuContainer;
     private ImageButton optionsButton;
@@ -87,7 +79,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        initializeGame(6, 4); // Default 4x6 grid
+        // Initialize the game with a 4x6 grid (adjust rows/columns as needed)
+        initializeGame(6, 4);
     }
 
     private void pauseGame() {
@@ -134,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
         moves = 0;
         seconds = 0;
         minutes = 0;
+        mismatches = 0;
         remainingPairs = (rows * cols) / 2;
         updateUI();
 
@@ -151,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
         }
         Collections.shuffle(emojis);
 
-        // Setup grid with square cells
+        // Setup grid layout
         gridLayout.removeAllViews();
         gridLayout.setColumnCount(cols);
         gridLayout.setRowCount(rows);
@@ -167,8 +161,8 @@ public class MainActivity extends AppCompatActivity {
         // Create cards
         cards = new ArrayList<>();
         for (int i = 0; i < rows * cols; i++) {
-            com.example.memorycardgame.MemoryCard card = new com.example.memorycardgame.MemoryCard(this, emojis.get(i));
-            card.setOnClickListener(v -> onCardClick((com.example.memorycardgame.MemoryCard) v));
+            MemoryCard card = new MemoryCard(this, emojis.get(i));
+            card.setOnClickListener(v -> onCardClick((MemoryCard) v));
 
             // Fixed square dimensions
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
@@ -191,8 +185,7 @@ public class MainActivity extends AppCompatActivity {
         startTimer();
     }
 
-    private void onCardClick(com.example.memorycardgame.MemoryCard card) {
-        // Don't allow card clicks when game is paused
+    private void onCardClick(MemoryCard card) {
         if (isProcessing || card.isFlipped() || isPaused) return;
 
         card.flip();
@@ -214,6 +207,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     firstCard.flip();
                     secondCard.flip();
+                    mismatches++; // Increment mismatches when cards don't match
                 }
                 firstCard = null;
                 secondCard = null;
@@ -250,15 +244,35 @@ public class MainActivity extends AppCompatActivity {
             timer.cancel();
             timer = null;
         }
+
         String message = String.format("Congratulations!\nCompleted in %d moves\nTime: %02d:%02d",
                 moves, minutes, seconds);
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+
+        // Get battery level
+        BatteryManager batteryManager = (BatteryManager) getSystemService(BATTERY_SERVICE);
+        int batteryLevel = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
+
+        // Launch GameSummaryActivity with game stats
+        Intent summaryIntent = new Intent(this, GameSummaryActivity.class);
+        summaryIntent.putExtra("TOTAL_TIME_MINUTES", minutes);
+        summaryIntent.putExtra("TOTAL_TIME_SECONDS", seconds);
+        summaryIntent.putExtra("TOTAL_MOVES", moves);
+        summaryIntent.putExtra("TOTAL_MISMATCHES", mismatches);
+        summaryIntent.putExtra("BATTERY_LEVEL", batteryLevel);
+
+        // Determine current theme (implement dynamic tracking as needed)
+        String currentTheme = "Light Mode";
+        summaryIntent.putExtra("CURRENT_THEME", currentTheme);
+
+        startActivity(summaryIntent);
+        finish();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        // Pause the game when app goes to background
+        // Pause the game if app goes to background
         if (!isPaused && timer != null) {
             pauseGame();
         }
@@ -267,11 +281,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // Make sure to cancel timer to prevent memory leaks
+        // Cancel timer to prevent memory leaks
         if (timer != null) {
             timer.cancel();
             timer = null;
         }
     }
-
 }

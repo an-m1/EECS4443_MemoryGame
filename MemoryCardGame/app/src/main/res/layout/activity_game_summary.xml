@@ -1,6 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center"
+    android:background="?attr/colorBackground">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="?attr/colorCard"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="Game Summary"
+        android:textColor="?attr/colorTextPrimary"
+        android:textSize="36dp"
+
+        android:textStyle="bold"
+        android:layout_marginBottom="32dp" />
+
+    <TextView
+        android:id="@+id/summaryTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="?attr/colorTextPrimary"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/summaryMovesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="?attr/colorTextPrimary"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/summaryMismatchesTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="?attr/colorTextPrimary"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/summaryThemeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="?attr/colorTextPrimary"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/summaryEfficiencyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="?attr/colorTextPrimary"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/summaryBatteryTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="?attr/colorTextPrimary"
+        android:layout_marginBottom="32dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/summaryRestartButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Restart"
+            android:background="?attr/colorButtonRestart"
+            android:layout_marginEnd="16dp" />
+
+        <Button
+            android:id="@+id/summaryHomeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Home"
+            android:background="?attr/colorButtonMainMenu" />
+    </LinearLayout>
+</LinearLayout>
