@@ -16,7 +16,7 @@ import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
 
-// TODO: implement the dark mode. and fix the light mode to be using the colours mentioned in the proposal.
+
 /* TODO: when the game is complete, direct the user to a summary activity, where the users game stat are displayed.
     we want fields like:
     - time taken
