@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
+import android.view.WindowManager;
+
 
 
 /* TODO: when the game is complete, direct the user to a summary activity, where the users game stat are displayed.
@@ -54,6 +56,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Override device auto-brightness, for consistent brightness in each test.
+        WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
+        layoutParams.screenBrightness = 1.0f; // maximum brightness
+        getWindow().setAttributes(layoutParams);
 
         gridLayout = findViewById(R.id.gridLayout);
         timeTextView = findViewById(R.id.timeTextView);
@@ -266,4 +273,5 @@ public class MainActivity extends AppCompatActivity {
             timer = null;
         }
     }
+
 }

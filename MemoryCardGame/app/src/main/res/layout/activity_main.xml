@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
@@ -10,161 +9,160 @@
     android:background="?attr/colorBackground"
 
     tools:context=".MainActivity"
-    tools:theme="@style/AppTheme"
-    >
+    tools:theme="@style/AppTheme">
 
     <!-- Main vertical container -->
-<LinearLayout
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical">
-
-<!-- Header area -->
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:gravity="start"
-        android:padding="16dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    android:background="?attr/colorHeader"
-        android:text="MEMORY MATCHING GAME"
-    android:textSize="24sp"
-    android:textStyle="bold"
+        <!-- Header area -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    android:textColor="?attr/colorTextPrimary" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="?attr/colorHeader"
+                android:gravity="start"
 
-    <ImageButton
-        android:id="@+id/optionsButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="16dp"
-        android:contentDescription="Options Menu"
+                android:padding="16dp"
+                android:text="MEMORY MATCHING GAME"
+                android:textColor="?attr/colorTextPrimary"
+                android:textSize="24sp"
 
-        android:background="?attr/selectableItemBackgroundBorderless"
+                android:textStyle="bold" />
 
-    app:tint="?attr/colorAccent"
+            <ImageButton
+                android:id="@+id/optionsButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="16dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
 
-    android:src="@drawable/menu" />
-</RelativeLayout>
+                android:contentDescription="Options Menu"
 
-<!-- Stats area (Moves / Time) -->
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+                android:src="@drawable/menu"
 
-android:background="?attr/colorCard"
-android:padding="8dp">
+                app:tint="?attr/colorAccent" />
+        </RelativeLayout>
 
-<TextView
-    android:id="@+id/movesTextView"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentStart="true"
-    android:layout_marginStart="12dp"
-    android:text="Moves: 0"
-android:textColor="?attr/colorTextPrimary" />
+        <!-- Stats area (Moves / Time) -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
 
-<TextView
-    android:id="@+id/timeTextView"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentEnd="true"
-    android:layout_marginEnd="12dp"
-    android:text="Time: 00:00"
-    android:textColor="?attr/colorTextPrimary" />
-</RelativeLayout>
+            android:background="?attr/colorCard"
+            android:padding="8dp">
 
-    <!-- Grid area -->
-<GridLayout
-android:id="@+id/gridLayout"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:layout_gravity="center"
-android:layout_weight="1"
-android:padding="16dp" />
+            <TextView
+                android:id="@+id/movesTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="12dp"
+                android:text="Moves: 0"
+                android:textColor="?attr/colorTextPrimary" />
+
+            <TextView
+                android:id="@+id/timeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="12dp"
+                android:text="Time: 00:00"
+                android:textColor="?attr/colorTextPrimary" />
+        </RelativeLayout>
+
+        <!-- Grid area -->
+        <GridLayout
+            android:id="@+id/gridLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:padding="16dp" />
     </LinearLayout>
 
-<FrameLayout
-android:id="@+id/pauseMenuContainer"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
+    <FrameLayout
+        android:id="@+id/pauseMenuContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
 
-    android:background="#99000000"
-    android:visibility="gone">
+        android:background="#99000000"
+        android:visibility="gone">
 
-<LinearLayout
-android:layout_width="300dp"
-android:layout_height="wrap_content"
-android:layout_gravity="center"
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
 
-    android:background="?attr/colorHeader"
-    android:elevation="8dp"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="24dp">
+            android:background="?attr/colorHeader"
+            android:elevation="8dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp">
 
-<TextView
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:layout_marginBottom="32dp"
-android:gravity="center"
-    android:text="GAME PAUSED"
-android:textSize="28sp"
-android:textStyle="bold"
-android:textColor="?attr/colorTextPrimary" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:gravity="center"
+                android:text="GAME PAUSED"
+                android:textColor="?attr/colorTextPrimary"
+                android:textSize="28sp"
+                android:textStyle="bold" />
 
-    <!-- Resume Button -->
-<Button
-android:id="@+id/resumeButton"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:layout_marginBottom="16dp"
+            <!-- Resume Button -->
+            <Button
+                android:id="@+id/resumeButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
 
-    android:background="?attr/colorButtonResume"
-    android:padding="16dp"
-    android:text="RESUME GAME"
-    android:textColor="@android:color/white" />
+                android:background="?attr/colorButtonResume"
+                android:padding="16dp"
+                android:text="RESUME GAME"
+                android:textColor="@android:color/white" />
 
-    <!-- Restart Button -->
-<Button
-android:id="@+id/restartButton"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:layout_marginBottom="16dp"
-android:background="?attr/colorButtonRestart"
-android:padding="16dp"
-    android:text="START OVER"
-android:textColor="@android:color/white" />
+            <!-- Restart Button -->
+            <Button
+                android:id="@+id/restartButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="?attr/colorButtonRestart"
+                android:padding="16dp"
+                android:text="START OVER"
+                android:textColor="@android:color/white" />
 
 
-    <!-- Settings Button -->
-<Button
-android:id="@+id/gameSettingsButton"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:layout_marginBottom="16dp"
-android:background="?attr/colorButtonSettings"
-android:padding="16dp"
-    android:text="SETTINGS"
-android:textColor="@android:color/white" />
+            <!-- Settings Button -->
+            <Button
+                android:id="@+id/gameSettingsButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="?attr/colorButtonSettings"
+                android:padding="16dp"
+                android:text="SETTINGS"
+                android:textColor="@android:color/white" />
 
-    <!-- Main Menu Button -->
-<Button
-android:id="@+id/mainMenuButton"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:background="?attr/colorButtonMainMenu"
-android:padding="16dp"
-    android:text="Main Menu"
-android:textColor="@android:color/white" />
-    </LinearLayout>
+            <!-- Main Menu Button -->
+            <Button
+                android:id="@+id/mainMenuButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorButtonMainMenu"
+                android:padding="16dp"
+                android:text="Main Menu"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
     </FrameLayout>
-    </RelativeLayout>
+</RelativeLayout>
