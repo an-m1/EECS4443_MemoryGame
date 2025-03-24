@@ -18,7 +18,8 @@ public class GameSummaryActivity extends AppCompatActivity {
         int seconds = intent.getIntExtra("TOTAL_TIME_SECONDS", 0);
         int totalMoves = intent.getIntExtra("TOTAL_MOVES", 0);
         int mismatches = intent.getIntExtra("TOTAL_MISMATCHES", 0);
-        int batteryLevel = intent.getIntExtra("BATTERY_LEVEL", 0);
+        int initialBatteryLevel = intent.getIntExtra("INITIAL_BATTERY_LEVEL", 0);
+        int finalBatteryLevel = intent.getIntExtra("FINAL_BATTERY_LEVEL", 0);
         String currentTheme = intent.getStringExtra("CURRENT_THEME");
 
         // Find TextViews
@@ -27,18 +28,27 @@ public class GameSummaryActivity extends AppCompatActivity {
         TextView mismatchesView = findViewById(R.id.summaryMismatchesTextView);
         TextView themeView = findViewById(R.id.summaryThemeTextView);
         TextView efficiencyView = findViewById(R.id.summaryEfficiencyTextView);
-        TextView batteryView = findViewById(R.id.summaryBatteryTextView);
+        TextView initialBatteryView = findViewById(R.id.summaryInitialBatteryTextView);
+        TextView finalBatteryView = findViewById(R.id.summaryFinalBatteryTextView);
+        TextView batteryDifferenceView = findViewById(R.id.summaryBatteryDifferenceTextView);
+
 
         // Calculate efficiency (pairs per move)
         // 6.0 (total number of pairs in the game) divided by total moves
         double efficiency = (totalMoves > 0) ? (6.0 / totalMoves) * 100 : 0;
+
+        // Calculate battery difference
+        int batteryDifference = initialBatteryLevel - finalBatteryLevel;
 
         // Set TextViews
         timeView.setText(String.format("Total Time: %02d:%02d", minutes, seconds));
         movesView.setText(String.format("Total Moves: %d", totalMoves));
         mismatchesView.setText(String.format("Mismatches: %d", mismatches));
         efficiencyView.setText(String.format("Efficiency: %.2f%%", efficiency));
-        batteryView.setText(String.format("Battery Level: %d%%", batteryLevel));
+        initialBatteryView.setText(String.format("Initial Battery (%%): %d%%", initialBatteryLevel));
+        finalBatteryView.setText(String.format("Final Battery (%%): %d%%", finalBatteryLevel));
+        batteryDifferenceView.setText(String.format("Battery Used (%%): %d%%", batteryDifference));
+
         themeView.setText(String.format("Theme: %s", currentTheme));
 
         // Restart and Home buttons

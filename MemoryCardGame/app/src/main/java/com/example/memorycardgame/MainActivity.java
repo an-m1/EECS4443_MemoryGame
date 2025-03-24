@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     private Timer timer;
     private int remainingPairs;
     private int mismatches = 0; // Track number of mismatches
+    private int initialBatteryLevel;
+
 
     // Variables for pause functionality
     private boolean isPaused = false;
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private Button settingsButton;
     private Button mainMenuButton;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
         WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
         layoutParams.screenBrightness = 1.0f; // maximum brightness
         getWindow().setAttributes(layoutParams);
+
+        // Capture initial battery level when game starts
+        initialBatteryLevel = getBatteryLevel();
 
         gridLayout = findViewById(R.id.gridLayout);
         timeTextView = findViewById(R.id.timeTextView);
@@ -239,19 +245,25 @@ public class MainActivity extends AppCompatActivity {
         movesTextView.setText("Moves: " + moves);
     }
 
+
+    // Helper method to get current battery level
+    private int getBatteryLevel() {
+        BatteryManager batteryManager = (BatteryManager) getSystemService(BATTERY_SERVICE);
+        return batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
+    }
+
     private void gameWon() {
         if (timer != null) {
             timer.cancel();
             timer = null;
         }
 
-        String message = String.format("Congratulations!\nCompleted in %d moves\nTime: %02d:%02d",
-                moves, minutes, seconds);
+        String message = String.format("Congratulations!\nCompleted in %d moves\nTime: %02d:%02d", moves, minutes, seconds);
+
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 
-        // Get battery level
-        BatteryManager batteryManager = (BatteryManager) getSystemService(BATTERY_SERVICE);
-        int batteryLevel = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
+        // Get final battery level
+        int finalBatteryLevel = getBatteryLevel();
 
         // Launch GameSummaryActivity with game stats
         Intent summaryIntent = new Intent(this, GameSummaryActivity.class);
@@ -259,11 +271,14 @@ public class MainActivity extends AppCompatActivity {
         summaryIntent.putExtra("TOTAL_TIME_SECONDS", seconds);
         summaryIntent.putExtra("TOTAL_MOVES", moves);
         summaryIntent.putExtra("TOTAL_MISMATCHES", mismatches);
-        summaryIntent.putExtra("BATTERY_LEVEL", batteryLevel);
+        summaryIntent.putExtra("INITIAL_BATTERY_LEVEL", initialBatteryLevel);
+        summaryIntent.putExtra("FINAL_BATTERY_LEVEL", finalBatteryLevel);
 
-        // Determine current theme (implement dynamic tracking as needed)
-        String currentTheme = "Light Mode";
+        // Determine current theme
+        boolean isDark = ThemeManager.isDarkMode(this);
+        String currentTheme = isDark ? "Dark Mode" : "Light Mode";
         summaryIntent.putExtra("CURRENT_THEME", currentTheme);
+
 
         startActivity(summaryIntent);
         finish();
