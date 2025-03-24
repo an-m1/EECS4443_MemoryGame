@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3AFF0000">
+    android:background="#3AF8F8F8">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:background="#33FFFFFF"
+                android:background="#EDEADE"
                 android:gravity="start"
                 android:padding="16dp"
                 android:text="MEMORY MATCHING GAME"
@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:background="#33FFFFFF"
+            android:background="#F9F6EE"
             android:padding="8dp">
 
             <TextView
@@ -83,7 +83,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="#4D394B"
+            android:background="#EDEADE"
             android:elevation="8dp"
             android:gravity="center"
             android:orientation="vertical"
@@ -95,7 +95,7 @@
                 android:layout_marginBottom="32dp"
                 android:gravity="center"
                 android:text="GAME PAUSED"
-                android:textColor="#FFEB3B"
+                android:textColor="#000000"
                 android:textSize="28sp"
                 android:textStyle="bold" />
 
