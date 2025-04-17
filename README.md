@@ -47,6 +47,7 @@ This app acts as the primary instrument for data collection in this experimental
      - Link to the final, post-testing questionnaire [https://docs.google.com/forms/d/e/1FAIpQLSfbszbsX7xBdO27zbzPdYVHfSxf5n-YHhAngbDJJoKkpGOSgg/viewform?usp=header].
 
 > Ensure brightness is fixed and “Night Shift” or “Auto Brightness” is disabled for accurate testing.
+> View the results from each test here: [https://docs.google.com/spreadsheets/d/1xdF9J2CcoD3w4UHf5hvJAEHmclyy40tq5_S6niudwcw/edit?usp=sharing]
 
 ---
 
