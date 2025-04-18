@@ -90,6 +90,7 @@ The app was tested using two devices with different screen technologies:
 - Support real-time adaptive UI based on ambient light or user preference.
 - Integrate more precise battery profiling tools.
 - Expand to larger participant pools and longer gameplay durations.
+- Note: Within the Settings activity, the Volume, Music, and Vibration features are currently non-functional, the sliders and switches are placeholders with no operational behavior. They were added solely to fill the empty space for visual balance within the interface. The Dark Mode toggle is the only working feature, as it is directly relevant to the research study. The other features are not pertinent to the study and were included for design purposes only.
 
 ---
 
