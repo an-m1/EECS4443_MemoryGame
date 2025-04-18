@@ -32,15 +32,16 @@ This app acts as the primary instrument for data collection in this experimental
 
 ## How to Use the App
 
-1. **Launch the App** on a compatible Android device.
-2. **Begin Game Session:**
+1. Sign the user testing consent form, confirming that you consent to participate in this study. Link to consent form: [https://docs.google.com/document/d/1FcnCv6tJolXa23gukLqPMuE60RuEVUNL/edit?usp=sharing&ouid=100861146226451250457&rtpof=true&sd=true].
+2. **Launch the App** on a compatible Android device.
+3. **Begin Game Session:**
    - You’ll see a 4x6 grid of face-down cards.
    - Tap to reveal two cards and try to find matching pairs.
    - The game records your moves, errors, and time taken.
-3. **Theme Toggle:**
+4. **Theme Toggle:**
    - Navigate to the settings menu.
    - Switch between Dark Mode and Light Mode to begin the next session.
-4. **Complete Surveys:**
+5. **Complete Surveys:**
    - After each game session, fill out a short questionnaire evaluating your comfort, visibility, and performance.
      - Link to the questionnaire [https://docs.google.com/forms/d/e/1FAIpQLSeud2WlgoCDm99dHJfhtwFDISDGqWH2An1hFlERBcrK_Qw-OA/viewform?usp=dialog].
    - At the end of both sessions, complete a final comparison survey.
